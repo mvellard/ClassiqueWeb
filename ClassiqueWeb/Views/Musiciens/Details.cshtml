@@ -89,7 +89,11 @@
 
     </dl>
 </div>
-<p>
-   
-    @Html.ActionLink("Retour au catalogue", "Index")
+
+   <p>
+       <a href=@Html.Action(
+       actionName: "Index",
+       controllerName: "ComposersController",
+       routeValues: new { code = Model.Code_Musicien })>Liste des oeuvres</a>
+          @Html.ActionLink("Retour au catalogue", "Index")
 </p>

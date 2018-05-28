@@ -13,13 +13,14 @@ namespace ClassiqueWeb.Controllers
     public class MusiciensController : Controller
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
+        private Classique_Web_2017Entities db2 = new Classique_Web_2017Entities();
 
         // GET: Musiciens
         public ActionResult Index(int? page)
         {
             
   
-            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays);
+            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m=>m.Composer);
             
             int pageSize = 20;
             int pageNumber = (page ?? 1);
@@ -45,13 +46,15 @@ namespace ClassiqueWeb.Controllers
                     musicien.Photo = Img;
                 }
             }
-            
+
             if (musicien == null)
             {
                 return HttpNotFound();
             }
             return View(musicien);
         }
+       
+        
 
         protected override void Dispose(bool disposing)
         {
