@@ -207,10 +207,11 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AbonnesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AchatsController.cs" />
+    <Compile Include="Controllers\ComposersController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MusiciensController.cs" />
+    <Compile Include="Controllers\OeuvresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -383,11 +384,13 @@
     <Content Include="Views\Abonnes\Index.cshtml" />
     <Content Include="Views\Musiciens\Details.cshtml" />
     <Content Include="Views\Musiciens\Index.cshtml" />
-    <Content Include="Views\Achats\Create.cshtml" />
-    <Content Include="Views\Achats\Delete.cshtml" />
-    <Content Include="Views\Achats\Details.cshtml" />
-    <Content Include="Views\Achats\Edit.cshtml" />
-    <Content Include="Views\Achats\Index.cshtml" />
+    <Content Include="Views\Oeuvres\Details.cshtml" />
+    <Content Include="Views\Oeuvres\Index.cshtml" />
+    <Content Include="Views\Composers\Create.cshtml" />
+    <Content Include="Views\Composers\Delete.cshtml" />
+    <Content Include="Views\Composers\Details.cshtml" />
+    <Content Include="Views\Composers\Edit.cshtml" />
+    <Content Include="Views\Composers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
