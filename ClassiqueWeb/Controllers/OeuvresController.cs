@@ -15,7 +15,7 @@ namespace ClassiqueWeb.Controllers
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
         // GET: Oeuvres
-        public ActionResult Index()
+        public ActionResult Index(int? id)
         {
             var oeuvre = db.Oeuvre.Include(o => o.Type_Morceaux);
             return View(oeuvre.ToList());

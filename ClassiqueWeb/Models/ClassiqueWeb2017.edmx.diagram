@@ -7,7 +7,7 @@
       <Diagram DiagramId="9e0fe4e03642473b8d1e37b71df4a92d" Name="Diagram1">
         <EntityTypeShape EntityType="Classique_Web_2017Model.Abonne" Width="1.5" PointX="6" PointY="10.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Classique_Web_2017Model.Achat" Width="1.5" PointX="8.25" PointY="11.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Classique_Web_2017Model.Album" Width="1.5" PointX="8.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Classique_Web_2017Model.Album" Width="1.5" PointX="8.375" PointY="14.875" IsExpanded="true" />
         <EntityTypeShape EntityType="Classique_Web_2017Model.Composer" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Classique_Web_2017Model.Composition" Width="1.5" PointX="0.75" PointY="17.5" IsExpanded="true" />
         <EntityTypeShape EntityType="Classique_Web_2017Model.Composition_Disque" Width="1.5" PointX="12.75" PointY="12.875" IsExpanded="true" />
