@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ClassiqueWeb.Models.Oeuvre>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Titre Oeuvre
+        </th>
+        <th>
+            Sous-titre
+        </th>
+        <th>
+            Tonalité
+        </th>
+        <th>
+            Année
+        </th>
+        <th>
+            Opus
+        </th>
+        <th>
+            Numéro opus
+        </th>
+        <th>
+            Libellé type
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Titre_Oeuvre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sous_Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tonalite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Annee)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Opus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Numéro_Opus)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type_Morceaux.Libelle_Type)
+        </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id=item.Code_Oeuvre })
+        </td>
+    </tr>
+}
+
+</table>
