@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ClassiqueWeb.Models.Composer>
+﻿@model IEnumerable<ClassiqueWeb.Models.Instrumentation>
 
 @{
     ViewBag.Title = "Index";
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Musicien.Nom_Musicien)
+            @Html.DisplayNameFor(model => model.Instrument.Nom_Instrument)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Oeuvre.Titre_Oeuvre)
@@ -23,13 +23,15 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Musicien.Nom_Musicien)
+            @Html.DisplayFor(modelItem => item.Instrument.Nom_Instrument)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Oeuvre.Titre_Oeuvre)
         </td>
         <td>
-            @Html.ActionLink("Details", "Details", new { id=item.Code_Composer }) |
+            @Html.ActionLink("Edit", "Edit", new { id=item.Code_Instrumentation }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Code_Instrumentation }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Code_Instrumentation })
         </td>
     </tr>
 }

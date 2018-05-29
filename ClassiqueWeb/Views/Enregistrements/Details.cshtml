@@ -1,0 +1,74 @@
+﻿@model ClassiqueWeb.Models.Enregistrement
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Enregistrement</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Code_Composition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Code_Composition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Nom_de_Fichier)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nom_de_Fichier)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duree)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duree)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Duree_Seconde)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Duree_Seconde)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prix)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prix)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Extrait)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Extrait)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code_Morceau }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

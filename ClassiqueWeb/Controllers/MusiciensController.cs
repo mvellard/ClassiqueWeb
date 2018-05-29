@@ -7,13 +7,13 @@ using ClassiqueWeb.Models;
 using System.IO;
 using PagedList;//Outils/Gestionnaire de paquets NuGet/Console du Gestionnaire de package /taper : Install-Package PagedList.Mvc
 using System;
+using System.Collections.Generic;
 
 namespace ClassiqueWeb.Controllers
 {
     public class MusiciensController : Controller
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
-        private Classique_Web_2017Entities db2 = new Classique_Web_2017Entities();
 
         // GET: Musiciens
         public ActionResult Index(int? page)
@@ -51,10 +51,20 @@ namespace ClassiqueWeb.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Composer = getCompose(id);
             return View(musicien);
         }
-       
-        
+        public List<Oeuvre> getCompose(int? musicien)
+        {
+
+            var composer = (from o in db.Oeuvre
+                            join c in db.Composer on o.Code_Oeuvre equals c.Code_Oeuvre
+                            join m in db.Musicien on c.Code_Musicien equals m.Code_Musicien
+                            where m.Code_Musicien == musicien
+                            select o);
+
+            return composer.ToList();
+        }
 
         protected override void Dispose(bool disposing)
         {

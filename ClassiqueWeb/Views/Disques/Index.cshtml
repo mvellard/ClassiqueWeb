@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ClassiqueWeb.Models.Disque>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference_Album)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Reference_Disque)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Album.Titre_Album)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference_Album)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Reference_Disque)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Album.Titre_Album)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Code_Disque }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Code_Disque }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Code_Disque })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ClassiqueWeb.Models.Interpreter>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Enregistrement.Titre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Instrument.Nom_Instrument)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Musicien.Nom_Musicien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Enregistrement.Titre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Instrument.Nom_Instrument)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Musicien.Nom_Musicien)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Code_Interpreter }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Code_Interpreter }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Code_Interpreter })
+        </td>
+    </tr>
+}
+
+</table>

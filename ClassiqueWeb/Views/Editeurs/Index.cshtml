@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ClassiqueWeb.Models.Editeur>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nom_Editeur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Pays.Nom_Pays)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nom_Editeur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Pays.Nom_Pays)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Code_Editeur }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Code_Editeur }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Code_Editeur })
+        </td>
+    </tr>
+}
+
+</table>

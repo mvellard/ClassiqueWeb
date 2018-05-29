@@ -1,0 +1,42 @@
+﻿@model ClassiqueWeb.Models.Disque
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Disque</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference_Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference_Album)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Reference_Disque)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Reference_Disque)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Album.Titre_Album)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Album.Titre_Album)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code_Disque }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

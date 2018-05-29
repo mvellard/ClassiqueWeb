@@ -1,0 +1,42 @@
+﻿@model ClassiqueWeb.Models.Direction
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Direction</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Enregistrement.Titre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Enregistrement.Titre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Musicien.Nom_Musicien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Musicien.Nom_Musicien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Orchestres.Nom_Orchestre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Orchestres.Nom_Orchestre)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code_Direction }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

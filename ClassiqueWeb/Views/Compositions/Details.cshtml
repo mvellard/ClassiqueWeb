@@ -1,0 +1,42 @@
+﻿@model ClassiqueWeb.Models.Composition
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Composition</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Titre_Composition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Titre_Composition)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Annee)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Annee)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Composante_Composition)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Composante_Composition)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Code_Composition }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
