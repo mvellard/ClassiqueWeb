@@ -51,12 +51,12 @@ namespace ClassiqueWeb.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Interpreter = getInterprete(id);
             ViewBag.Composer = getCompose(id);
             return View(musicien);
         }
         public List<Oeuvre> getCompose(int? musicien)
         {
-
             var composer = (from o in db.Oeuvre
                             join c in db.Composer on o.Code_Oeuvre equals c.Code_Oeuvre
                             join m in db.Musicien on c.Code_Musicien equals m.Code_Musicien
@@ -65,6 +65,30 @@ namespace ClassiqueWeb.Controllers
 
             return composer.ToList();
         }
+
+        public List<Enregistrement> getInterprete(int? musicien)
+        {
+            var interprete = (from e in db.Enregistrement
+                              join i in db.Interpreter on e.Code_Morceau equals i.Code_Morceau
+                              join m in db.Musicien on i.Code_Musicien equals m.Code_Musicien
+                              where m.Code_Musicien == musicien
+                              select e);
+
+            foreach (var i in interprete)
+            {
+                ViewData["Enregistrement"] = getEnregistrement(i.Code_Morceau);
+            }
+            return interprete.ToList();
+        }
+
+        public FileResult getEnregistrement(int? enrg)
+        {
+            var music = db.Enregistrement.Single(g => g.Code_Morceau == enrg);
+            if (music != null)
+                    return File(music.Extrait, "audio/mp3");
+            else return null;
+        }
+
 
         protected override void Dispose(bool disposing)
         {
