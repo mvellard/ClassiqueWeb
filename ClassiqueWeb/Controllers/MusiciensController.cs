@@ -78,16 +78,17 @@ namespace ClassiqueWeb.Controllers
 
             foreach (var i in interprete)
             {
-                ViewData["Enregistrement"] = getEnregistrement(i.Code_Morceau);
+                ViewBag.Enregistrement = getEnregistrement(i.Code_Morceau);
             }
             return interprete.ToList();
         }
 
-        public FileResult getEnregistrement(int? enrg)
+        public String getEnregistrement(int? enrg)
         {
             var music = db.Enregistrement.Single(g => g.Code_Morceau == enrg);
+            var msc = String.Format("data:audio/mp3;base64,{0}", Convert.ToBase64String(music.Extrait));
             if (music != null)
-                    return File(music.Extrait, "audio/mp3");
+                    return msc;
             else return null;
         }
 
