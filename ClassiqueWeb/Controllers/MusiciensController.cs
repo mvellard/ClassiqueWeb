@@ -93,12 +93,17 @@ namespace ClassiqueWeb.Controllers
         }
 
         [Authorize]
-        public void AjoutPanier(int? morceau)
+        public ActionResult AjoutPanier(int? morceau)
         {
+
+            
             var userID = User.Identity.GetUserId();
             var IdAbonne = db.Abonne.Single(a => a.UserId==userID);
-            Achat panier = new Achat { Code_Enregistrement = morceau, Code_Abonne = IdAbonne.Code_Abonne};
+            Achat panier = new Achat {Code_Enregistrement = morceau, Code_Abonne = IdAbonne.Code_Abonne};
             db.Achat.Add(panier);
+            db.SaveChanges();
+            String lien = "?userId=" + userID;
+            return RedirectToAction("Panier", "Achats1",new { userId = userID });
         }
 
         protected override void Dispose(bool disposing)

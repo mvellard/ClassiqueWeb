@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ClassiqueWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace ClassiqueWeb.Controllers
 {
@@ -18,7 +19,7 @@ namespace ClassiqueWeb.Controllers
         // GET: Achats1
         public ActionResult Panier(String userId)
         {
-            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
+            var idAbonne = db.Abonne.First(a => a.UserId == userId);
             var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where (a => a.Achat_Confirme == null);
             return View(achat.ToList());
         }
@@ -47,7 +48,8 @@ namespace ClassiqueWeb.Controllers
             Achat achat = db.Achat.Find(id);
             db.Achat.Remove(achat);
             db.SaveChanges();
-            return RedirectToAction("Panier");
+            var userID = User.Identity.GetUserId();
+            return RedirectToAction("Panier",new { userId = userID });
         }
 
         protected override void Dispose(bool disposing)

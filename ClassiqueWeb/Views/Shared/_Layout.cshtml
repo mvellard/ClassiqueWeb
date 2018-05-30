@@ -18,7 +18,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <span class="icon-bar"></span>
+                    }
                 </button>
                 @Html.ActionLink("Classique Web", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
@@ -28,7 +31,10 @@
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     <li>@Html.ActionLink("Catalogue", "Index", "Musiciens")</li>
-                    <li>@Html.ActionLink("Panier", "Panier", "Achats1")</li>
+                    @using Microsoft.AspNet.Identity;
+                    @if  (User.Identity.IsAuthenticated) {
+                        <li>@Html.ActionLink("Panier", "../Achats1/Panier", new { userId = User.Identity.GetUserId() })</li>
+                    }
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
