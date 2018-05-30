@@ -14,90 +14,16 @@ namespace ClassiqueWeb.Controllers
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
+        [Authorize]
         // GET: Achats1
-        public ActionResult Index()
+        public ActionResult Panier(String userId)
         {
-            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement);
+            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
+            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where (a => a.Achat_Confirme == null);
             return View(achat.ToList());
         }
 
-        // GET: Achats1/Details/5
-        public ActionResult Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Achat achat = db.Achat.Find(id);
-            if (achat == null)
-            {
-                return HttpNotFound();
-            }
-            return View(achat);
-        }
-
-        // GET: Achats1/Create
-        public ActionResult Create()
-        {
-            ViewBag.Code_Abonne = new SelectList(db.Abonne, "Code_Abonne", "Nom_Abonne");
-            ViewBag.Code_Enregistrement = new SelectList(db.Enregistrement, "Code_Morceau", "Titre");
-            return View();
-        }
-
-        // POST: Achats1/Create
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Code_Achat,Code_Enregistrement,Code_Abonne,Achat_Confirme")] Achat achat)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Achat.Add(achat);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.Code_Abonne = new SelectList(db.Abonne, "Code_Abonne", "Nom_Abonne", achat.Code_Abonne);
-            ViewBag.Code_Enregistrement = new SelectList(db.Enregistrement, "Code_Morceau", "Titre", achat.Code_Enregistrement);
-            return View(achat);
-        }
-
-        // GET: Achats1/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Achat achat = db.Achat.Find(id);
-            if (achat == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.Code_Abonne = new SelectList(db.Abonne, "Code_Abonne", "Nom_Abonne", achat.Code_Abonne);
-            ViewBag.Code_Enregistrement = new SelectList(db.Enregistrement, "Code_Morceau", "Titre", achat.Code_Enregistrement);
-            return View(achat);
-        }
-
-        // POST: Achats1/Edit/5
-        // Afin de déjouer les attaques par sur-validation, activez les propriétés spécifiques que vous voulez lier. Pour 
-        // plus de détails, voir  http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Code_Achat,Code_Enregistrement,Code_Abonne,Achat_Confirme")] Achat achat)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(achat).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.Code_Abonne = new SelectList(db.Abonne, "Code_Abonne", "Nom_Abonne", achat.Code_Abonne);
-            ViewBag.Code_Enregistrement = new SelectList(db.Enregistrement, "Code_Morceau", "Titre", achat.Code_Enregistrement);
-            return View(achat);
-        }
-
+        [Authorize]
         // GET: Achats1/Delete/5
         public ActionResult Delete(int? id)
         {
@@ -112,7 +38,7 @@ namespace ClassiqueWeb.Controllers
             }
             return View(achat);
         }
-
+        [Authorize]
         // POST: Achats1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -121,7 +47,7 @@ namespace ClassiqueWeb.Controllers
             Achat achat = db.Achat.Find(id);
             db.Achat.Remove(achat);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("Panier");
         }
 
         protected override void Dispose(bool disposing)

@@ -13,7 +13,6 @@ namespace ClassiqueWeb.Controllers
             return View();
         }
 
-        [Authorize]
         public ActionResult About()
         {
             ViewBag.Message = "Description de l'application";

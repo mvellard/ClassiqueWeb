@@ -468,7 +468,7 @@
     <Content Include="Views\Achats1\Delete.cshtml" />
     <Content Include="Views\Achats1\Details.cshtml" />
     <Content Include="Views\Achats1\Edit.cshtml" />
-    <Content Include="Views\Achats1\Index.cshtml" />
+    <Content Include="Views\Achats1\Panier.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
