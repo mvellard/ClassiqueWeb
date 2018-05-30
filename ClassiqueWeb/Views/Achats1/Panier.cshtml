@@ -37,7 +37,15 @@
                 Total
             </td>
             <td>
-                @Model.Count(),00
+                @Model.Sum(i => i.Enregistrement.Prix)
             </td>
         </tr>
-    </table>
+
+        <tr>
+            Crédits Abonné
+        </tr>
+        <tr>
+           @Model.Sum(i => i.Abonne.Credit)
+        </tr>
+
+</table>
