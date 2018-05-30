@@ -15,14 +15,17 @@ namespace ClassiqueWeb.Controllers
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
+
         [Authorize]
         // GET: Achats1
         public ActionResult Panier(String userId)
         {
-            var idAbonne = db.Abonne.First(a => a.UserId == userId);
+           
+            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
             var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where (a => a.Achat_Confirme == null);
             return View(achat.ToList());
         }
+
 
         [Authorize]
         // GET: Achats1/Delete/5
@@ -51,6 +54,8 @@ namespace ClassiqueWeb.Controllers
             var userID = User.Identity.GetUserId();
             return RedirectToAction("Panier",new { userId = userID });
         }
+
+
 
         protected override void Dispose(bool disposing)
         {

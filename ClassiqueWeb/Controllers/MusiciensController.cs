@@ -102,7 +102,6 @@ namespace ClassiqueWeb.Controllers
             Achat panier = new Achat {Code_Enregistrement = morceau, Code_Abonne = IdAbonne.Code_Abonne};
             db.Achat.Add(panier);
             db.SaveChanges();
-            String lien = "?userId=" + userID;
             return RedirectToAction("Panier", "Achats1",new { userId = userID });
         }
 
