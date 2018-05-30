@@ -8,6 +8,8 @@ using System.IO;
 using PagedList;//Outils/Gestionnaire de paquets NuGet/Console du Gestionnaire de package /taper : Install-Package PagedList.Mvc
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
+using Microsoft.AspNet.Identity;
 
 namespace ClassiqueWeb.Controllers
 {
@@ -89,6 +91,14 @@ namespace ClassiqueWeb.Controllers
             else return null;
         }
 
+        [Authorize]
+        public void AjoutPanier(int? morceau)
+        {
+            var userID = User.Identity.GetUserId();
+            var IdAbonne = db.Abonne.Single(a => a.UserId==userID);
+            Achat panier = new Achat { Code_Enregistrement = morceau, Code_Abonne = IdAbonne.Code_Abonne};
+            db.Achat.Add(panier);
+        }
 
         protected override void Dispose(bool disposing)
         {

@@ -108,6 +108,9 @@
             <source src=@ViewData["Enregistrement"] type="audio/mp3">
         </audio> 
     </td >
+    <td>
+        @Html.ActionLink("Ajouter au panier", "AjoutPanier", new { morceaux = item.Code_Morceau})
+    </td>
         </tr >
         <br />
     }

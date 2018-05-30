@@ -207,6 +207,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AbonnesController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Achats1Controller.cs" />
     <Compile Include="Controllers\AlbumsController.cs" />
     <Compile Include="Controllers\ComposersController.cs" />
     <Compile Include="Controllers\CompositionsController.cs" />
@@ -463,10 +464,14 @@
     <Content Include="Views\Interpreters\Details.cshtml" />
     <Content Include="Views\Interpreters\Edit.cshtml" />
     <Content Include="Views\Interpreters\Index.cshtml" />
+    <Content Include="Views\Achats1\Create.cshtml" />
+    <Content Include="Views\Achats1\Delete.cshtml" />
+    <Content Include="Views\Achats1\Details.cshtml" />
+    <Content Include="Views\Achats1\Edit.cshtml" />
+    <Content Include="Views\Achats1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Liens\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
