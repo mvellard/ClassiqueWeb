@@ -17,10 +17,9 @@ namespace ClassiqueWeb.Controllers
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
-        // GET: Musiciens
+        // Liste des musiciens paginée
         public ActionResult Index(int? page)
         {
-            
   
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m=>m.Composer);
             
@@ -30,7 +29,7 @@ namespace ClassiqueWeb.Controllers
             return View(musicien.OrderBy(m=>m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
-        // GET: Musiciens/Details/5
+        // Détail d'un musicien
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +38,7 @@ namespace ClassiqueWeb.Controllers
             }
             
             Musicien musicien = db.Musicien.Find(id);
+            //Récupération de la photo d'un musicien
             if (Request.Files["files"] != null)
             {
                 byte[] Img;
@@ -53,10 +53,14 @@ namespace ClassiqueWeb.Controllers
             {
                 return HttpNotFound();
             }
+            //Récupération des interprétations
             ViewBag.Interpreter = getInterprete(id);
+            //Récupération des compositions
             ViewBag.Composer = getCompose(id);
             return View(musicien);
         }
+
+        //Permets de récupérer la liste des oeuvres compisées d'un musicien
         public List<Oeuvre> getCompose(int? musicien)
         {
             var composer = (from o in db.Oeuvre
@@ -68,6 +72,7 @@ namespace ClassiqueWeb.Controllers
             return composer.ToList();
         }
 
+        //Permets de récupérer la liste des enregistrements interprétées d'un musicien
         public List<Enregistrement> getInterprete(int? musicien)
         {
             var interprete = (from e in db.Enregistrement
@@ -76,13 +81,16 @@ namespace ClassiqueWeb.Controllers
                               where m.Code_Musicien == musicien
                               select e);
 
+            // Récupération de l'enregistrement audio
             foreach (var i in interprete)
             {
                 ViewBag.Enregistrement = getEnregistrement(i.Code_Morceau);
             }
+
             return interprete.ToList();
         }
 
+        // Permets de récupérer l'enregistrement audio d'un enregistrement
         public String getEnregistrement(int? enrg)
         {
             var music = db.Enregistrement.Single(g => g.Code_Morceau == enrg);
@@ -92,11 +100,10 @@ namespace ClassiqueWeb.Controllers
             else return null;
         }
 
+        //Permets d'ajouter un enregistrement au panier d'un abonné identifié
         [Authorize]
         public ActionResult AjoutPanier(int? morceau)
         {
-
-            
             var userID = User.Identity.GetUserId();
             var IdAbonne = db.Abonne.Single(a => a.UserId==userID);
             Achat panier = new Achat {Code_Enregistrement = morceau, Code_Abonne = IdAbonne.Code_Abonne};

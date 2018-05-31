@@ -15,20 +15,34 @@ namespace ClassiqueWeb.Controllers
     {
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
-
+        //Consultation du panier de l'abonné identifié
         [Authorize]
-        // GET: Achats1
         public ActionResult Panier(String userId)
         {
            
             var idAbonne = db.Abonne.Single(a => a.UserId == userId);
-            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where (a => a.Achat_Confirme == null);
+            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where(a => a.Achat_Confirme == null);
+            
+            /*
+            foreach (var i in achat)
+            {
+                ViewBag.Musicien = getMusicien(i.Code_Enregistrement);
+            }
+            */
             return View(achat.ToList());
         }
+    
+        /*
+        // Rérécupéreration du nom du musicien pour chaque enregistrement du panier
+        public String getMusicien(int? morceau)
+        {
+            var musicien = db.Interpreter.Include(m => m.Musicien).First( i => i.Code_Morceau == morceau);
+            return Convert.ToString(musicien.Musicien.Nom_Musicien);
+        }
+        */
 
-
+        //Permet de supprimer un enregistrement du panier
         [Authorize]
-        // GET: Achats1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -42,8 +56,9 @@ namespace ClassiqueWeb.Controllers
             }
             return View(achat);
         }
+
+        //Confirmation de la suppression
         [Authorize]
-        // POST: Achats1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -54,8 +69,6 @@ namespace ClassiqueWeb.Controllers
             var userID = User.Identity.GetUserId();
             return RedirectToAction("Panier",new { userId = userID });
         }
-
-
 
         protected override void Dispose(bool disposing)
         {
