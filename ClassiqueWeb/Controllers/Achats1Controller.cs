@@ -33,7 +33,7 @@ namespace ClassiqueWeb.Controllers
         }
     
         /*
-        // Rérécupéreration du nom du musicien pour chaque enregistrement du panier
+        // Récupération du nom du musicien pour chaque enregistrement du panier
         public String getMusicien(int? morceau)
         {
             var musicien = db.Interpreter.Include(m => m.Musicien).First( i => i.Code_Morceau == morceau);
