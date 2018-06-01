@@ -29,6 +29,28 @@ namespace ClassiqueWeb.Controllers
             return View(musicien.OrderBy(m=>m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
+        public ActionResult IndexCompose(int? page)
+        {
+
+            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument == "Composition");
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
+            return View(musicien.OrderBy(m => m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
+        }
+
+        public ActionResult IndexInterprete(int? page)
+        {
+
+            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument != "Composition");
+
+            int pageSize = 20;
+            int pageNumber = (page ?? 1);
+
+            return View(musicien.OrderBy(m => m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
+        }
+
         // Détail d'un musicien
         public ActionResult Details(int? id)
         {

@@ -29,12 +29,22 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Accueil", "Index", "Home")</li>
                     <li>@Html.ActionLink("À propos de", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Catalogue", "Index", "Musiciens")</li>
+                    <li class="dropdown">
+                        <a id="dLabel" data-target="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            Rechercher
+                            <span class="caret"></span>
+                        </a>
+                        <ul id="lien" class="dropdown-menu" aria-labelledby="dLabel">
+                            <li>@Html.ActionLink("Catalogue", "Index", "Musiciens")</li>
+                            <li>@Html.ActionLink("Compositeurs", "IndexCompose", "Musiciens")</li>
+                            <li>@Html.ActionLink("Interprètes", "IndexInterprete", "Musiciens")</li>
+                        </ul>
+                    </li>
                     @using Microsoft.AspNet.Identity;
                     @if  (User.Identity.IsAuthenticated) {
                         <li>@Html.ActionLink("Panier", "../Achats1/Panier", new { userId = User.Identity.GetUserId() })</li>
                     }
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

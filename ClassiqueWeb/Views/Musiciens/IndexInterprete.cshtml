@@ -1,0 +1,69 @@
+﻿@model PagedList.IPagedList<ClassiqueWeb.Models.Musicien>
+@using PagedList.Mvc;
+
+
+@{
+    ViewBag.Title = "IndexInterprete";
+}
+
+<h2>IndexInterprete</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Nom
+        </th>
+        <th>
+            Prénom
+        </th>
+        <th>
+            Année de naissance
+        </th>
+        <th>
+            Année de Mort
+        </th>
+        <th>
+            Genre
+        </th>
+        <th>
+            Instrument
+        </th>
+        <th>
+            Pays
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom_Musicien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom_Musicien)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Annee_Naissance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Annee_Mort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre.Libelle_Abrege)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Instrument.Nom_Instrument)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Pays.Nom_Pays)
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = item.Code_Musicien }) |
+            </td>
+        </tr>
+    }
+
+</table>
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, }))
