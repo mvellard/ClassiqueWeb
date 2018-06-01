@@ -34,6 +34,7 @@ nav,
 section,
 summary {
   display: block;
+  text-align:center;
 }
 
 audio,
@@ -59,6 +60,10 @@ html {
 
 body {
   margin: 0;
+}
+
+#footer {
+    text-align: center;
 }
 
 a:focus {
@@ -337,6 +342,7 @@ textarea {
 
 a {
   color: #428bca;
+  cursor:pointer;
   text-decoration: none;
 }
 
