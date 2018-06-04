@@ -67,11 +67,11 @@
                 @Html.DisplayFor(modelItem => item.Pays.Nom_Pays)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Code_Musicien, page = Model.PageNumber, typeIndex = "IndexInterprete" })
+                @Html.ActionLink("Details", "Details", new { id = item.Code_Musicien, page = Model.PageNumber, typeIndex = "IndexInterprete", searchString = ViewBag.CurrentFilter })
             </td>
         </tr>
     }
 
 </table>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("IndexInterprete", new { page, }))
+@Html.PagedListPager(Model, page => Url.Action("IndexInterprete", new { page, searchString = ViewBag.CurrentFilter }))

@@ -20,7 +20,6 @@ namespace ClassiqueWeb.Controllers
         // Liste des musiciens paginée
         public ActionResult Index(int? page, string searchString)
         {
-
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer);
 
             if (!String.IsNullOrEmpty(searchString))
@@ -39,7 +38,6 @@ namespace ClassiqueWeb.Controllers
         // Liste des compositeurs paginée
         public ActionResult IndexCompose(int? page, string searchString)
         {
-
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument == "Composition");
 
             if (!String.IsNullOrEmpty(searchString))
@@ -58,7 +56,6 @@ namespace ClassiqueWeb.Controllers
         // Liste des interprètes paginée
         public ActionResult IndexInterprete(int? page, string searchString)
         {
-
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument != "Composition");
 
             if (!String.IsNullOrEmpty(searchString))
@@ -67,7 +64,6 @@ namespace ClassiqueWeb.Controllers
             }
 
             ViewBag.CurrentFilter = searchString;
-
             int pageSize = 20;
             int pageNumber = (page ?? 1);
 
@@ -75,7 +71,7 @@ namespace ClassiqueWeb.Controllers
         }
 
         // Détail d'un musicien
-        public ActionResult Details(int? id, int? page, string typeIndex)
+        public ActionResult Details(int? id, int? page, string typeIndex,string searchString)
         {
             if (id == null)
             {
@@ -98,6 +94,8 @@ namespace ClassiqueWeb.Controllers
             {
                 return HttpNotFound();
             }
+
+            ViewBag.SearchString = searchString;
             //Sauvegarde du type d'Index de provenance
             ViewBag.TypeIndex = typeIndex;
             //Sauvegarde du numéro de page de provenance
