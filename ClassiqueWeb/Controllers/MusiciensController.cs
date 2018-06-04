@@ -36,6 +36,7 @@ namespace ClassiqueWeb.Controllers
             return View(musicien.OrderBy(m=>m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
+        // Liste des compositeurs paginée
         public ActionResult IndexCompose(int? page, string searchString)
         {
 
@@ -54,6 +55,7 @@ namespace ClassiqueWeb.Controllers
             return View(musicien.OrderBy(m => m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
+        // Liste des interprètes paginée
         public ActionResult IndexInterprete(int? page, string searchString)
         {
 
@@ -73,7 +75,7 @@ namespace ClassiqueWeb.Controllers
         }
 
         // Détail d'un musicien
-        public ActionResult Details(int? id)
+        public ActionResult Details(int? id, int? page, string typeIndex)
         {
             if (id == null)
             {
@@ -96,6 +98,10 @@ namespace ClassiqueWeb.Controllers
             {
                 return HttpNotFound();
             }
+            //Sauvegarde du type d'Index de provenance
+            ViewBag.TypeIndex = typeIndex;
+            //Sauvegarde du numéro de page de provenance
+            ViewBag.Page = page;
             //Récupération des interprétations
             ViewBag.Interpreter = getInterprete(id);
             //Récupération des compositions
@@ -103,7 +109,7 @@ namespace ClassiqueWeb.Controllers
             return View(musicien);
         }
 
-        //Permets de récupérer la liste des oeuvres compisées d'un musicien
+        //Permets de récupérer la liste des oeuvres composées d'un musicien
         public List<Oeuvre> getCompose(int? musicien)
         {
             var composer = (from o in db.Oeuvre

@@ -118,5 +118,5 @@
     }
 
    <p>
-       @Html.ActionLink("Retour au catalogue", "Index")
+       @Html.ActionLink("Retour au catalogue",(string)ViewBag.TypeIndex, new { page = ViewBag.Page })
 </p>

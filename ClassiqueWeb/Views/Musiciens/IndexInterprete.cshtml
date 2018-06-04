@@ -67,7 +67,7 @@
                 @Html.DisplayFor(modelItem => item.Pays.Nom_Pays)
             </td>
             <td>
-                @Html.ActionLink("Details", "Details", new { id = item.Code_Musicien }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Code_Musicien, page = Model.PageNumber, typeIndex = "IndexInterprete" })
             </td>
         </tr>
     }
