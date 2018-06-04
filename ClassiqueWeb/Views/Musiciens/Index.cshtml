@@ -8,6 +8,13 @@
 
 <h2>Index</h2>
 
+@using (Html.BeginForm("Index", "Musiciens", FormMethod.Get))
+{
+    <p>
+        Recherche par nom: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Rechercher" />
+    </p>
+}
 
 <table class="table">
     <tr>

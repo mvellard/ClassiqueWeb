@@ -18,21 +18,35 @@ namespace ClassiqueWeb.Controllers
         private Classique_Web_2017Entities db = new Classique_Web_2017Entities();
 
         // Liste des musiciens paginée
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string searchString)
         {
-  
-            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m=>m.Composer);
-            
+
+            var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer);
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                musicien = musicien.Where(m => m.Nom_Musicien.Contains(searchString));
+            }
+
+            ViewBag.CurrentFilter = searchString;
+
             int pageSize = 20;
             int pageNumber = (page ?? 1);
             
             return View(musicien.OrderBy(m=>m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult IndexCompose(int? page)
+        public ActionResult IndexCompose(int? page, string searchString)
         {
 
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument == "Composition");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                musicien = musicien.Where(m => m.Nom_Musicien.Contains(searchString));
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             int pageSize = 20;
             int pageNumber = (page ?? 1);
@@ -40,10 +54,17 @@ namespace ClassiqueWeb.Controllers
             return View(musicien.OrderBy(m => m.Nom_Musicien).ToPagedList(pageNumber, pageSize));
         }
 
-        public ActionResult IndexInterprete(int? page)
+        public ActionResult IndexInterprete(int? page, string searchString)
         {
 
             var musicien = db.Musicien.Include(m => m.Genre).Include(m => m.Instrument).Include(m => m.Pays).Include(m => m.Composer).Where(m => m.Instrument.Nom_Instrument != "Composition");
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                musicien = musicien.Where(m => m.Nom_Musicien.Contains(searchString));
+            }
+
+            ViewBag.CurrentFilter = searchString;
 
             int pageSize = 20;
             int pageNumber = (page ?? 1);

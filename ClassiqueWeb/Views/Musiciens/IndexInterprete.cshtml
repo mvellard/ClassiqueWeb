@@ -8,6 +8,14 @@
 
 <h2>Interprètes</h2>
 
+@using (Html.BeginForm("IndexInterprete", "Musiciens", FormMethod.Get))
+{
+    <p>
+        Recherche par nom: @Html.TextBox("SearchString", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Rechercher" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
@@ -66,4 +74,4 @@
 
 </table>
 Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, }))
+@Html.PagedListPager(Model, page => Url.Action("IndexInterprete", new { page, }))
