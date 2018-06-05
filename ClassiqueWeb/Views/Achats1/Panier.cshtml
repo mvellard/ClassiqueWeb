@@ -6,6 +6,9 @@
     }
 
     <h2>Panier</h2>
+    @using Microsoft.AspNet.Identity;
+    @Html.ActionLink("Valider mon panier", "ValiderPanier", new { userId = User.Identity.GetUserId() })
+    @Html.ActionLink("Historique de mes achats", "HistoAchats", new { userId = User.Identity.GetUserId() })
 
     <table class="table">
         <tr>
@@ -35,6 +38,7 @@
                 </td>
             </tr>
         }
+
         <tr>
             <td>
                 Total
@@ -43,12 +47,12 @@
                 @Model.Sum(i => i.Enregistrement.Prix)
             </td>
         </tr>
-
         <tr>
-            Crédits Abonné
-        </tr>
-        <tr>
-           @Model.Sum(i => i.Abonne.Credit)
-        </tr>
-
-</table>
+            <td>
+                Crédits Abonné
+            </td>
+            <td>
+                @Model.Sum(i => i.Abonne.Credit)
+            </td>
+        </tr>   
+    </table>

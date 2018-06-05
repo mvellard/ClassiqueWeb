@@ -485,6 +485,7 @@
     <Content Include="Views\Achats1\Panier.cshtml" />
     <Content Include="Views\Musiciens\IndexCompose.cshtml" />
     <Content Include="Views\Musiciens\IndexInterprete.cshtml" />
+    <Content Include="Views\Achats1\HistoAchats.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

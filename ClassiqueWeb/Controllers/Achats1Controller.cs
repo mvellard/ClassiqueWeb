@@ -22,24 +22,34 @@ namespace ClassiqueWeb.Controllers
            
             var idAbonne = db.Abonne.Single(a => a.UserId == userId);
             var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where(a => a.Achat_Confirme == null);
-            
-            /*
-            foreach (var i in achat)
-            {
-                ViewBag.Musicien = getMusicien(i.Code_Enregistrement);
-            }
-            */
+
             return View(achat.ToList());
         }
-    
-        /*
-        // Récupération du nom du musicien pour chaque enregistrement du panier
-        public String getMusicien(int? morceau)
+
+        //Validation de tous les articles du panier
+        public ActionResult ValiderPanier(String userId)
         {
-            var musicien = db.Interpreter.Include(m => m.Musicien).First( i => i.Code_Morceau == morceau);
-            return Convert.ToString(musicien.Musicien.Nom_Musicien);
+            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
+            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where(a => a.Achat_Confirme == null);
+            foreach (var i in achat)
+            {
+                i.Achat_Confirme = true;
+            }
+           
+            db.SaveChanges();
+            return RedirectToAction("Panier", new { userId = userId });
         }
-        */
+
+        //Consultation de l'historique des achats de l'abonné identifié
+        [Authorize]
+        public ActionResult HistoAchats(String userId)
+        {
+
+            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
+            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where(a => a.Achat_Confirme == true);
+
+            return View(achat.ToList());
+        }
 
         //Permet de supprimer un enregistrement du panier
         [Authorize]
