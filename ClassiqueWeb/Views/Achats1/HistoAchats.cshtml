@@ -4,16 +4,16 @@
 }
 
 <h2>Historique des achats</h2>
-
+@using Microsoft.AspNet.Identity;
+@Html.ActionLink("Retour au panier", "Panier", new { userId = User.Identity.GetUserId() })|
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Enregistrement.Titre)
+            Titre
         </th>
         <th>
             prix
         </th>
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -22,12 +22,12 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Enregistrement.Titre)
             </td>
-            <td></td>
             <td>
                 @Html.DisplayFor(modelItem => item.Enregistrement.Prix)
             </td>
         </tr>
     }
+
     <tr>
         <td>
             Total
@@ -36,6 +36,13 @@
             @Model.Sum(i => i.Enregistrement.Prix)
         </td>
     </tr>
-
+    <tr>
+        <td>
+            Crédits Abonné
+        </td>
+        <td>
+            @Model.Sum(i => i.Abonne.Credit)
+        </td>
+    </tr>
 </table>
 
