@@ -1,0 +1,15 @@
+﻿@model ClassiqueWeb.Models.Achat
+
+@{
+    ViewBag.Title = "Recharger";
+}
+
+<h2>Recharger</h2>
+@using Microsoft.AspNet.Identity;
+@using (Html.BeginForm("Recharger", "Achats1", FormMethod.Get))
+{
+    <p>
+        Nombre de crédits à ajouter : @Html.TextBox("credits")
+        <input type="submit" value="credits" />
+    </p>
+}

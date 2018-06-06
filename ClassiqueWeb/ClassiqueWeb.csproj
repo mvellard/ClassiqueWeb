@@ -478,14 +478,13 @@
     <Content Include="Views\Interpreters\Details.cshtml" />
     <Content Include="Views\Interpreters\Edit.cshtml" />
     <Content Include="Views\Interpreters\Index.cshtml" />
-    <Content Include="Views\Achats1\Create.cshtml" />
     <Content Include="Views\Achats1\Delete.cshtml" />
-    <Content Include="Views\Achats1\Details.cshtml" />
-    <Content Include="Views\Achats1\Edit.cshtml" />
     <Content Include="Views\Achats1\Panier.cshtml" />
     <Content Include="Views\Musiciens\IndexCompose.cshtml" />
     <Content Include="Views\Musiciens\IndexInterprete.cshtml" />
     <Content Include="Views\Achats1\HistoAchats.cshtml" />
+    <Content Include="Views\Achats1\CreditsInsuffisants.cshtml" />
+    <Content Include="Views\Achats1\Recharger.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

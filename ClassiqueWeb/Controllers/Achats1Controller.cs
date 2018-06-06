@@ -26,18 +26,43 @@ namespace ClassiqueWeb.Controllers
             return View(achat.ToList());
         }
 
+
         //Validation de tous les articles du panier
         public ActionResult ValiderPanier(String userId)
         {
-            var idAbonne = db.Abonne.Single(a => a.UserId == userId);
-            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == idAbonne.Code_Abonne).Where(a => a.Achat_Confirme == null);
-            foreach (var i in achat)
+            var Abonne = db.Abonne.Single(a => a.UserId == userId);
+            var achat = db.Achat.Include(a => a.Abonne).Include(a => a.Enregistrement).Where(a => a.Code_Abonne == Abonne.Code_Abonne).Where(a => a.Achat_Confirme == null);
+            if (Abonne.Credit.Value < achat.Sum(a => a.Enregistrement.Prix))
             {
-                i.Achat_Confirme = true;
+                return RedirectToAction("CreditsInsuffisants", new { userId = userId });
             }
-           
-            db.SaveChanges();
-            return RedirectToAction("Panier", new { userId = userId });
+            else
+            {
+                foreach (var i in achat)
+                {
+                    i.Achat_Confirme = true;
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("Panier", new { userId = userId });
+            }
+        }
+        public ActionResult CreditsInsuffisants(String userId)
+        {
+            return View();
+        }
+
+        public ActionResult Recharger(String userId, String credits)
+        {
+            var Abonne = db.Abonne.Single(a => a.UserId == userId);
+            if (!String.IsNullOrEmpty(credits))
+            { 
+                Abonne.Credit = Abonne.Credit + Int32.Parse(credits);
+                db.SaveChanges();
+                return RedirectToAction("Panier", new { userId = userId });
+            }
+            return View();
+
         }
 
         //Consultation de l'historique des achats de l'abonné identifié

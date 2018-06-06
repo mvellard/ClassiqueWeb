@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "CreditsInsuffisants";
+}
+
+<h2>Credits Inssuffisants</h2>
+
+<h3 class="text-danger">Vos crédits sont insufisants, voulez vous recharger ?</h3>
+
+@using Microsoft.AspNet.Identity;
+@Html.ActionLink("Recharger", "Recharger", new { userId = User.Identity.GetUserId() })|
+
+    
+
+
+
