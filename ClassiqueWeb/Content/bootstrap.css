@@ -31,7 +31,6 @@ header,
 hgroup,
 main,
 nav,
-section,
 summary {
   display: block;
   text-align:center;
@@ -64,6 +63,7 @@ body {
 
 #footer {
     text-align: center;
+    margin-top:20px;
 }
 
 a:focus {
@@ -768,7 +768,6 @@ pre code {
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
-  background-image:url("/images/background.jpg");
 }
 
 .container:before,
@@ -4946,11 +4945,12 @@ a.list-group-item.active > .badge,
 
 .jumbotron h1 {
   line-height: 1;
-  color: inherit;
+  color: white;
 }
 
 .jumbotron p {
   line-height: 1.4;
+  color: white;
 }
 
 .container .jumbotron {
