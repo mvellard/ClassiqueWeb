@@ -66,6 +66,10 @@ body {
     margin-top:20px;
 }
 
+image {
+    background-image:url("images/background.jpg");
+}
+
 a:focus {
   outline: thin dotted;
 }
